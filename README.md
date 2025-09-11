@@ -1,5 +1,7 @@
 # OpenWrt Development Environment
 
+For a detailed list of the core OpenWrt commands used for patching and development (such as make, quilt, etc.), please refer to the steps.txt file in this repository.
+
 ## Features
 
 -   **Dockerized:** All tools and dependencies are inside a Docker container, keeping your host system clean.
@@ -57,4 +59,15 @@ To build the Docker image (if it doesn't exist) and enter an interactive shell i
 
 ```bash
 docker compose run --rm openwrt
+```
+
+Run the main build script:
+
+```bash
+./build.sh
+```
+
+Or if you want to apply changes only run:
+```bash
+./apply_changes.sh <sdk_name>
 ```
