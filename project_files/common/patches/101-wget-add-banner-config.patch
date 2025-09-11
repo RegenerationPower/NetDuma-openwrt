@@ -1,0 +1,20 @@
+diff --git a/net/wget/Makefile b/net/wget/Makefile
+index f6b088121..422132ebc 100644
+--- a/net/wget/Makefile
++++ b/net/wget/Makefile
+@@ -105,5 +105,15 @@ define Package/wget-nossl/install
+ 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/wget $(1)/usr/libexec/wget-nossl
+ endef
+ 
++define Package/wget-ssl/config
++    config WGET_NETDUMA_BANNER
++        bool "Add Netduma Test banner"
++        default n
++endef
++
++ifeq ($(CONFIG_WGET_NETDUMA_BANNER),y)
++        TARGET_CFLAGS+=-DWGET_NETDUMA_BANNER
++endif
++
+ $(eval $(call BuildPackage,wget-ssl))
+ $(eval $(call BuildPackage,wget-nossl))

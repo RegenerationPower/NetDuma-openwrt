@@ -1,0 +1,32 @@
+docker compose run --rm openwrt
+
+cd openwrt-sdk-22.03.0-ramips-mt7621_gcc-11.2.0_musl.Linux-x86_64
+OR
+cd openwrt-sdk-22.03.0-x86-generic_gcc-11.2.0_musl.Linux-x86_64
+
+./scripts/feeds update -a
+./scripts/feeds install wget libpcre
+
+make package/wget/prepare V=s QUILT=1
+cd build_dir/target-mipsel_24kc_musl/wget-nossl/wget-1.21.2/
+quilt push -a
+quilt new 102-wget-add-banner-to-output.patch
+quilt edit src/main.c
+quilt diff
+quilt refresh
+cp patches/102-wget-add-banner-to-output.patch /work/project_files/common/patches/
+cd ../../../..
+make package/wget/update V=s
+
+OTHER WINDOW
+cd feeds/packages/net/wget
+vim Makefile
+git diff > /work/project_files/common/patches/101-wget-add-banner-config.patch
+git reset --hard HEAD
+vim Makefile
+git diff > /work/project_files/common/patches/103-enable-pcre-support.patch
+git reset --hard HEAD
+
+make distclean
+
+./build.sh

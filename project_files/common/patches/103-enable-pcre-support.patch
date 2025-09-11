@@ -1,0 +1,12 @@
+diff --git a/net/wget/Makefile b/net/wget/Makefile
+index f6b088121..cbd8b469d 100644
+--- a/net/wget/Makefile
++++ b/net/wget/Makefile
+@@ -72,7 +72,6 @@ endef
+ CONFIGURE_ARGS+= \
+ 	--disable-rpath \
+ 	--disable-iri \
+-	--disable-pcre2 \
+ 	--with-included-libunistring \
+ 	--without-libuuid \
+ 	--without-libpsl
