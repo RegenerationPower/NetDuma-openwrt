@@ -1,0 +1,14 @@
+services:
+  openwrt:
+    build:
+      context: .
+      args:
+        USERNAME: ${USER}
+        USER_UID: ${UID}
+        USER_GID: ${GID}
+    image: openwrt-practise-img
+    container_name: openwrt-practise
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/work
