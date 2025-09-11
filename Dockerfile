@@ -47,6 +47,7 @@ RUN groupmod -g $USER_GID ubuntu && \
 
 USER $USERNAME
 
+# Set basic quilt configuration
 RUN echo 'QUILT_DIFF_ARGS="--no-timestamps --no-index -p ab --color=auto"' > ~/.quiltrc && \
     echo 'QUILT_REFRESH_ARGS="--no-timestamps --no-index -p ab"' >> ~/.quiltrc && \
     echo 'QUILT_SERIES_ARGS="--color=auto"' >> ~/.quiltrc && \
