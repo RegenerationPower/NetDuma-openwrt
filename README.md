@@ -1,14 +1,13 @@
-# OpenWrt Development Environment
+# NetDuma test task
 
 For a detailed list of the core OpenWrt commands used for patching and development (such as make, quilt, etc.), please refer to the steps.txt file in this repository.
 
 ## Features
 
--   **Dockerized:** All tools and dependencies are inside a Docker container, keeping your host system clean.
--   **User Permission Sync:** Automatically syncs the container user's UID/GID with your host user to prevent `Permission denied` errors.
--   **Declarative Setup:** Uses `docker-compose.yml` to define the environment for clarity and scalability.
--   **Automated SDK Setup:** A helper script downloads and prepares the required OpenWrt SDKs.
--   **Organized Project Structure:** A clean `project_files` directory for custom packages and patches.
+-   **Isolated**: Uses Docker so no useless tools are installed on your host machine.
+-   **Automated**: Makefile and scripts handle setup, building, and cleaning.
+-   **Permissions Solved**: Automatically syncs user permissions to avoid file access errors in Docker volume.
+-   **Efficient**: The Docker image is kept small; large SDKs are downloaded separately and only once.
 
 ---
 
@@ -17,14 +16,23 @@ For a detailed list of the core OpenWrt commands used for patching and developme
 -   [Docker](https://docs.docker.com/get-docker/)
 -   [Docker Compose](https://docs.docker.com/compose/install/) (V2, included with modern Docker installations)
 -   A Linux-based host system (or WSL2 on Windows)
+-   Make
 
 ---
 
-## First-Time Setup
+## Usage with make
+
+This project is controlled via a simple `Makefile`. For a full list of available commands and their descriptions, run:
+
+```bash
+make help
+```
+
+## First-Time Setup without make
 
 Follow these steps to initialize the project for the first time.
 
-### 1. Configure Local Environment
+### Configure Local Environment
 
 This project requires a local `.env` file to correctly map your user permissions into the container.
 
@@ -36,7 +44,7 @@ cp .env.example .env
 
 The default values (UID=1000, GID=1000) are common, but you should verify them by running `id` in your terminal. If your values are different, update the .env file accordingly.
 
-### 2. Download the OpenWrt SDKs
+### Download the OpenWrt SDKs
 
 Run the setup script to download and extract the MIPS and x86 SDK toolchains.
 
@@ -53,7 +61,7 @@ While it's possible to download the SDKs directly within the Dockerfile, this pr
 
 This separation of concerns leads to a faster and more maintainable development workflow.
   
-### 3. Daily Workflow
+### Daily Workflow
 
 To build the Docker image (if it doesn't exist) and enter an interactive shell inside the container, run:
 
