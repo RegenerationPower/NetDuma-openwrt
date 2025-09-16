@@ -44,7 +44,7 @@ else
     echo "WARNING: wget recipe not found at '$WGET_RECIPE_PATH'. Skipping patches."
 fi
 
-WGET_PATCH_DIR="$WGET_RECIPE_PATH=/patches"
+WGET_PATCH_DIR="$WGET_RECIPE_PATH/patches"
 
 if [ -d "$WGET_PATCH_DIR" ]; then
     echo "Copying source code patches for wget..."
