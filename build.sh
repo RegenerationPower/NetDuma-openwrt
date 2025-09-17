@@ -32,7 +32,7 @@ build_target() {
         make package/wget/compile V=s # It can be used with -j $(($(nproc)+1))
     )
 
-    local ipk_file=$(find "$sdk_dir/bin/packages" -name "wget_*.ipk")
+    local ipk_file=$(find "$sdk_dir/bin/packages" -name "wget-nossl*.ipk")
 
     if [ -n "$ipk_file" ]; then
         cp "$ipk_file" "$OUTPUT_DIR/"
