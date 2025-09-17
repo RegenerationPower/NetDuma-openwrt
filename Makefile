@@ -28,6 +28,10 @@ setup:
 	@./setup_sdks.sh
 
 build: setup
+	@echo "Setting up build environment..."
+	@echo "UID=$(shell id -u)" > .env
+	@echo "GID=$(shell id -g)" >> .env
+	@echo "USER=$(shell whoami)" >> .env
 	@echo "Starting the full build process inside Docker..."
 	$(COMPOSE_RUN) ./build.sh
 
